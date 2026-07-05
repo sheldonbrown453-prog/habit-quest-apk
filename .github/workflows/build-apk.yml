@@ -39,8 +39,11 @@ jobs:
     
     - name: Build APK
       working-directory: ./android
+      env:
+        JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
       run: |
         chmod +x gradlew
+        echo "org.gradle.java.home=$JAVA_HOME" >> gradle.properties
         ./gradlew assembleDebug --stacktrace
     
     - name: Upload APK
